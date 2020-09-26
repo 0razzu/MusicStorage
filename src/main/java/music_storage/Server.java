@@ -1,18 +1,16 @@
 package music_storage;
 
 
-import music_storage.dao.MusicianDao;
-import music_storage.dao_impl.MusicianDaoImpl;
-import music_storage.dao.TrackDao;
-import music_storage.dao_impl.TrackDaoImpl;
 import music_storage.database.DatabaseConnection;
+import music_storage.service.MusicianService;
+import music_storage.service.TrackService;
 
 import java.sql.SQLException;
 
 
 public class Server {
-    private static final MusicianDao musicianDao = new MusicianDaoImpl();
-    private static final TrackDao trackDao = new TrackDaoImpl();
+    private static final MusicianService musicianService = new MusicianService();
+    private static final TrackService trackService = new TrackService();
     
     
     public static void start() throws SQLException {
