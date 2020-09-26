@@ -1,9 +1,6 @@
 package music_storage.model;
 
 
-import music_storage.error.ErrorMessage;
-import music_storage.error.ServerException;
-
 import java.util.Objects;
 
 
@@ -12,13 +9,13 @@ public class Musician {
     private String name;
     
     
-    public Musician(int id, String name) throws ServerException {
+    public Musician(int id, String name) {
         setId(id);
         setName(name);
     }
     
     
-    public Musician(String name) throws ServerException {
+    public Musician(String name) {
         this(0, name);
     }
     
@@ -28,10 +25,7 @@ public class Musician {
     }
     
     
-    public void setName(String name) throws ServerException {
-        if (name == null || name.isBlank())
-            throw new ServerException(ErrorMessage.EMPTY_NAME);
-        
+    public void setName(String name) {
         this.name = name;
     }
     
