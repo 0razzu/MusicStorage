@@ -1,11 +1,11 @@
-package music_storage.request;
+package music_storage.dto;
 
 
-public class IdRequest {
+public class IdDto {
     private int id;
     
     
-    public IdRequest(int id) {
+    public IdDto(int id) {
         setId(id);
     }
     

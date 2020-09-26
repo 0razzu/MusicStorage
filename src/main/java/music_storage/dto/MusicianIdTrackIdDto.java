@@ -1,12 +1,12 @@
-package music_storage.request;
+package music_storage.dto;
 
 
-public class MusicianIdTrackIdRequest {
+public class MusicianIdTrackIdDto {
     private int musicianId;
     private int trackId;
     
     
-    public MusicianIdTrackIdRequest(int musicianId, int trackId) {
+    public MusicianIdTrackIdDto(int musicianId, int trackId) {
         setMusicianId(musicianId);
         setTrackId(trackId);
     }
