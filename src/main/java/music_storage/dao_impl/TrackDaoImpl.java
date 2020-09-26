@@ -120,8 +120,9 @@ public class TrackDaoImpl implements TrackDao {
                 
                 while (rs.next())
                     musicians.add(new Musician(
-                            rs.getInt("id"),
-                            rs.getString("name"))
+                                    rs.getInt("id"),
+                                    rs.getString("name")
+                            )
                     );
                 
                 return musicians;
