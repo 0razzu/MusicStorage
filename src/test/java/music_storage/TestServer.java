@@ -24,12 +24,13 @@ public class TestServer {
     
     @AfterEach
     void clearDatabase() {
-    
+        Server.delAllTracks("{}");
+        Server.delAllMusicians("{}");
     }
     
     
     @Test
     void testSmth() {
-    
+        
     }
 }
