@@ -4,6 +4,7 @@ package music_storage.error;
 public class ErrorMessage {
     public static final String DB_ADD_MUSICIAN = "Failed to add the musician";
     public static final String DB_ADD_TRACK = "Failed to add the track";
+    public static final String DB_ASSOCIATE_MUSICIANS_WITH_TRACK = "Failed to associate the musicians with the track";
     public static final String DB_DEL_MUSICIAN = "Failed to delete the musician";
     public static final String DB_DEL_TRACK = "Failed to delete the track";
     public static final String DB_DEL_ALL_MUSICIANS = "Failed to delete all musicians";

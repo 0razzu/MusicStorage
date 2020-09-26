@@ -2,7 +2,9 @@ package music_storage.service;
 
 
 import com.google.gson.Gson;
+import music_storage.dao.MusicianDao;
 import music_storage.dao.TrackDao;
+import music_storage.dao_impl.MusicianDaoImpl;
 import music_storage.dao_impl.TrackDaoImpl;
 import music_storage.dto.*;
 import music_storage.error.ErrorMessage;
@@ -18,6 +20,7 @@ import java.util.List;
 public class TrackService {
     private static final Gson gson = new Gson();
     private static final TrackDao trackDao = new TrackDaoImpl();
+    private static final MusicianDao musicianDao = new MusicianDaoImpl();
     
     
     public String addTrack(String trackJson) {
@@ -72,6 +75,27 @@ public class TrackService {
         try {
             EmptyDto emptyDto = JsonToDtoConverter.convert(emptyJson, EmptyDto.class);
             trackDao.delAllTracks();
+            
+            return gson.toJson(new EmptyDto());
+        } catch (ServerException e) {
+            return gson.toJson(new ErrorDto(e.getMessage()));
+        }
+    }
+    
+    
+    public String associateMusiciansWithTrack(String trackIdMusicianIdsJson) {
+        try {
+            TrackIdMusicianIdsDto trackIdMusicianIdsDto =
+                    JsonToDtoConverter.convert(trackIdMusicianIdsJson, TrackIdMusicianIdsDto.class);
+            
+            if (!trackDao.trackExists(trackIdMusicianIdsDto.getTrackId()))
+                throw new ServerException(ErrorMessage.DB_TRACK_NOT_FOUND);
+            
+            for (int musicianId: trackIdMusicianIdsDto.getMusicianIds())
+                if (!musicianDao.musicianExists(musicianId))
+                    throw new ServerException(ErrorMessage.DB_MUSICIAN_NOT_FOUND);
+            
+            trackDao.associateMusiciansWithTrack(trackIdMusicianIdsDto.getTrackId(), trackIdMusicianIdsDto.getMusicianIds());
             
             return gson.toJson(new EmptyDto());
         } catch (ServerException e) {

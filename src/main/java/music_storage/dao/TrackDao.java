@@ -17,5 +17,6 @@ public interface TrackDao {
     void delTrack(int trackId) throws ServerException;
     void delAllTracks() throws ServerException;
     
+    void associateMusiciansWithTrack(int trackId, int... musicianIds) throws ServerException;
     List<Musician> getTrackMusicians(int trackId) throws ServerException;
 }

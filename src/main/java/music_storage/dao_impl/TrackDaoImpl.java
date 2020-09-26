@@ -107,6 +107,25 @@ public class TrackDaoImpl implements TrackDao {
     
     
     @Override
+    public void associateMusiciansWithTrack(int trackId, int... musicianIds) throws ServerException {
+        Connection con = DatabaseConnection.getConnection();
+        String insertQuery = "INSERT IGNORE musician_track (musician_id, track_id) VALUES (?, ?) ";
+        
+        try (PreparedStatement st = con.prepareStatement(insertQuery)) {
+            for (int musicianId: musicianIds) {
+                st.setInt(1, musicianId);
+                st.setInt(2, trackId);
+                st.addBatch();
+            }
+            
+            st.executeBatch();
+        } catch (SQLException e) {
+            throw new ServerException(ErrorMessage.DB_ASSOCIATE_MUSICIANS_WITH_TRACK);
+        }
+    }
+    
+    
+    @Override
     public List<Musician> getTrackMusicians(int trackId) throws ServerException {
         Connection con = DatabaseConnection.getConnection();
         String getQuery = "SELECT musician_id AS id, musician.name " +
