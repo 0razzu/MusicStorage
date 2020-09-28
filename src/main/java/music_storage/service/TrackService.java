@@ -91,9 +91,8 @@ public class TrackService {
             if (!trackDao.trackExists(trackIdMusicianIdsDto.getTrackId()))
                 throw new ServerException(ErrorMessage.DB_TRACK_NOT_FOUND);
             
-            for (int musicianId: trackIdMusicianIdsDto.getMusicianIds())
-                if (!musicianDao.musicianExists(musicianId))
-                    throw new ServerException(ErrorMessage.DB_MUSICIAN_NOT_FOUND);
+            if (!musicianDao.allMusiciansExist(trackIdMusicianIdsDto.getMusicianIds()))
+                throw new ServerException(ErrorMessage.DB_MUSICIAN_NOT_FOUND);
             
             trackDao.associateMusiciansWithTrack(trackIdMusicianIdsDto.getTrackId(), trackIdMusicianIdsDto.getMusicianIds());
             

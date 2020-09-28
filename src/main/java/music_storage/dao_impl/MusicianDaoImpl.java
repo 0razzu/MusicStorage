@@ -11,6 +11,7 @@ import music_storage.model.Track;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class MusicianDaoImpl implements MusicianDao {
@@ -70,6 +71,23 @@ public class MusicianDaoImpl implements MusicianDao {
             try (ResultSet rs = st.executeQuery()) {
                 return rs.next();
             }
+        } catch (SQLException e) {
+            throw new ServerException(ErrorMessage.DB_MUSICIAN_EXISTS);
+        }
+    }
+    
+    
+    @Override
+    public boolean allMusiciansExist(List<Integer> musicianIds) throws ServerException {
+        Connection con = DatabaseConnection.getConnection();
+        String checkQuery = String.format("SELECT COUNT(*) FROM musician WHERE id IN (%s)",
+                musicianIds.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        
+        try (PreparedStatement st = con.prepareStatement(checkQuery);
+             ResultSet rs = st.executeQuery()) {
+            rs.next();
+            
+            return rs.getInt(1) == musicianIds.size();
         } catch (SQLException e) {
             throw new ServerException(ErrorMessage.DB_MUSICIAN_EXISTS);
         }

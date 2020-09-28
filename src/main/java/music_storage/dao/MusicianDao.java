@@ -13,6 +13,7 @@ public interface MusicianDao {
     
     Musician getMusician(int musicianId) throws ServerException;
     boolean musicianExists(int musicianId) throws ServerException;
+    boolean allMusiciansExist(List<Integer> musicianIds) throws ServerException;
     
     void delMusician(int musicianId) throws ServerException;
     void delAllMusicians() throws ServerException;
