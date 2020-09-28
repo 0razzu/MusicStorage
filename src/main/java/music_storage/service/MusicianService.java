@@ -38,6 +38,7 @@ public class MusicianService {
     public String getMusician(String idJson) {
         try {
             IdDto idDto = JsonToDtoConverter.convert(idJson, IdDto.class);
+            idDto.validate();
             Musician musician = musicianDao.getMusician(idDto.getId());
             
             return gson.toJson(
@@ -55,6 +56,11 @@ public class MusicianService {
     public String delMusician(String idJson) {
         try {
             IdDto idDto = JsonToDtoConverter.convert(idJson, IdDto.class);
+            idDto.validate();
+    
+            if (!musicianDao.musicianExists(idDto.getId()))
+                throw new ServerException(ErrorMessage.DB_MUSICIAN_NOT_FOUND);
+            
             musicianDao.delMusician(idDto.getId());
             
             return gson.toJson(new EmptyDto());
@@ -79,6 +85,7 @@ public class MusicianService {
     public String getMusicianTracks(String idJson) {
         try {
             IdDto idDto = JsonToDtoConverter.convert(idJson, IdDto.class);
+            idDto.validate();
             
             if (!musicianDao.musicianExists(idDto.getId()))
                 throw new ServerException(ErrorMessage.DB_MUSICIAN_NOT_FOUND);

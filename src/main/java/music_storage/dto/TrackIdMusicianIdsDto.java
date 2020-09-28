@@ -1,11 +1,14 @@
 package music_storage.dto;
 
 
+import music_storage.error.ErrorMessage;
+import music_storage.error.ServerException;
+
 import java.util.List;
 
 
 public class TrackIdMusicianIdsDto {
-    private int trackId;
+    private Integer trackId;
     private List<Integer> musicianIds;
     
     
@@ -32,5 +35,11 @@ public class TrackIdMusicianIdsDto {
     
     public List<Integer> getMusicianIds() {
         return musicianIds;
+    }
+    
+    
+    public void validate() throws ServerException {
+        if (trackId == null || musicianIds.isEmpty() || musicianIds.contains(null))
+            throw new ServerException(ErrorMessage.REQUEST_FORMAT_EXCEPTION);
     }
 }

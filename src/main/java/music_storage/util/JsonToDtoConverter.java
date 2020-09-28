@@ -16,11 +16,11 @@ public class JsonToDtoConverter {
             T dto = gson.fromJson(json, classOfT);
             
             if (dto == null)
-                throw new ServerException(ErrorMessage.EMPTY_REQUEST);
+                throw new ServerException(ErrorMessage.REQUEST_FORMAT_EXCEPTION);
             
             return dto;
         } catch (JsonSyntaxException e) {
-            throw new ServerException(ErrorMessage.JSON_SYNTAX_EXCEPTION);
+            throw new ServerException(ErrorMessage.REQUEST_FORMAT_EXCEPTION);
         }
     }
 }

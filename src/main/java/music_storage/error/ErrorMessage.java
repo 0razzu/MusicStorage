@@ -19,6 +19,5 @@ public class ErrorMessage {
     public static final String DB_TRACK_NOT_FOUND = "Could not find a track with this id";
     public static final String EMPTY_GENRE = "Genre cannot be empty";
     public static final String EMPTY_NAME = "Name cannot be null or empty";
-    public static final String EMPTY_REQUEST = "Request cannot be empty";
-    public static final String JSON_SYNTAX_EXCEPTION = "The request contains JSON syntax error";
+    public static final String REQUEST_FORMAT_EXCEPTION = "The request contains some format errors";
 }

@@ -1,8 +1,12 @@
 package music_storage.dto;
 
 
+import music_storage.error.ErrorMessage;
+import music_storage.error.ServerException;
+
+
 public class IdDto {
-    private int id;
+    private Integer id;
     
     
     public IdDto(int id) {
@@ -17,5 +21,11 @@ public class IdDto {
     
     public int getId() {
         return id;
+    }
+    
+    
+    public void validate() throws ServerException {
+        if (id == null)
+            throw new ServerException(ErrorMessage.REQUEST_FORMAT_EXCEPTION);
     }
 }
