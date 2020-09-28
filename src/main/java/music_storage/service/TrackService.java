@@ -64,6 +64,10 @@ public class TrackService {
         try {
             IdDto idDto = JsonToDtoConverter.convert(idJson, IdDto.class);
             idDto.validate();
+    
+            if (!trackDao.trackExists(idDto.getId()))
+                throw new ServerException(ErrorMessage.DB_TRACK_NOT_FOUND);
+    
             trackDao.delTrack(idDto.getId());
             
             return gson.toJson(new EmptyDto());
