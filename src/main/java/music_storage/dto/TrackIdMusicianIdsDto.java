@@ -1,12 +1,15 @@
 package music_storage.dto;
 
 
+import java.util.List;
+
+
 public class TrackIdMusicianIdsDto {
     private int trackId;
-    private int[] musicianIds;
+    private List<Integer> musicianIds;
     
     
-    public TrackIdMusicianIdsDto(int trackId, int[] musicianIds) {
+    public TrackIdMusicianIdsDto(int trackId, List<Integer> musicianIds) {
         this.trackId = trackId;
         this.musicianIds = musicianIds;
     }
@@ -17,7 +20,7 @@ public class TrackIdMusicianIdsDto {
     }
     
     
-    public void setMusicianIds(int[] musicianIds) {
+    public void setMusicianIds(List<Integer> musicianIds) {
         this.musicianIds = musicianIds;
     }
     
@@ -27,7 +30,7 @@ public class TrackIdMusicianIdsDto {
     }
     
     
-    public int[] getMusicianIds() {
+    public List<Integer> getMusicianIds() {
         return musicianIds;
     }
 }
