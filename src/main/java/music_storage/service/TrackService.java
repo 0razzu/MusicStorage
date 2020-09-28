@@ -44,6 +44,7 @@ public class TrackService {
     public String getTrack(String idJson) {
         try {
             IdDto idDto = JsonToDtoConverter.convert(idJson, IdDto.class);
+            idDto.validate();
             Track track = trackDao.getTrack(idDto.getId());
             
             return gson.toJson(
@@ -62,6 +63,7 @@ public class TrackService {
     public String delTrack(String idJson) {
         try {
             IdDto idDto = JsonToDtoConverter.convert(idJson, IdDto.class);
+            idDto.validate();
             trackDao.delTrack(idDto.getId());
             
             return gson.toJson(new EmptyDto());
@@ -87,6 +89,7 @@ public class TrackService {
         try {
             TrackIdMusicianIdsDto trackIdMusicianIdsDto =
                     JsonToDtoConverter.convert(trackIdMusicianIdsJson, TrackIdMusicianIdsDto.class);
+            trackIdMusicianIdsDto.validate();
             
             if (!trackDao.trackExists(trackIdMusicianIdsDto.getTrackId()))
                 throw new ServerException(ErrorMessage.DB_TRACK_NOT_FOUND);
@@ -106,6 +109,7 @@ public class TrackService {
     public String getTrackMusicians(String idJson) {
         try {
             IdDto idDto = JsonToDtoConverter.convert(idJson, IdDto.class);
+            idDto.validate();
             
             if (!trackDao.trackExists(idDto.getId()))
                 throw new ServerException(ErrorMessage.DB_TRACK_NOT_FOUND);
