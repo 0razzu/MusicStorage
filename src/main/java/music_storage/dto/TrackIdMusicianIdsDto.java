@@ -13,8 +13,8 @@ public class TrackIdMusicianIdsDto {
     
     
     public TrackIdMusicianIdsDto(int trackId, List<Integer> musicianIds) {
-        this.trackId = trackId;
-        this.musicianIds = musicianIds;
+        setTrackId(trackId);
+        setMusicianIds(musicianIds);
     }
     
     
